@@ -33,17 +33,11 @@ export default function Contact() {
         padding: "100px 24px",
         background: "var(--dark)",
         color: "var(--cream)",
+        overflow: "hidden",
       }}
     >
       <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 80,
-          alignItems: "start",
-        }}
+        className="contact-mobile"
       >
         {/* Left — info */}
         <FadeIn>
@@ -64,6 +58,7 @@ export default function Contact() {
             >
               Reservas
             </div>
+
             <h2
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
@@ -78,6 +73,7 @@ export default function Contact() {
               <br />
               <em>cita hoy</em>
             </h2>
+
             <p
               style={{
                 fontFamily: "var(--sans)",
@@ -91,6 +87,7 @@ export default function Contact() {
               Escríbeme directamente por WhatsApp o completa el formulario y te
               contactaré para confirmar tu cita.
             </p>
+
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               {CONTACT_INFO.map(({ icon, text }) => (
                 <div
@@ -120,7 +117,7 @@ export default function Contact() {
             <div
               style={{
                 textAlign: "center",
-                padding: "60px 40px",
+                padding: "40px 24px",
                 border: "1px solid #3a3028",
               }}
             >
@@ -134,6 +131,7 @@ export default function Contact() {
               >
                 ✦
               </div>
+
               <h3
                 style={{
                   fontFamily: "'Cormorant Garamond', serif",
@@ -144,6 +142,7 @@ export default function Contact() {
               >
                 ¡Listo!
               </h3>
+
               <p
                 style={{
                   fontFamily: "var(--sans)",
@@ -153,6 +152,7 @@ export default function Contact() {
               >
                 Abriendo WhatsApp para confirmar tu cita...
               </p>
+
               <button
                 className="btn-outline"
                 style={{
@@ -168,7 +168,13 @@ export default function Contact() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              style={{ display: "flex", flexDirection: "column", gap: 14 }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 14,
+                width: "100%",
+                minWidth: 0,
+              }}
             >
               <input
                 required
@@ -178,6 +184,7 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleChange}
               />
+
               <input
                 required
                 className="form-input"
@@ -186,6 +193,7 @@ export default function Contact() {
                 value={formData.phone}
                 onChange={handleChange}
               />
+
               <select
                 required
                 className="form-input"
@@ -202,6 +210,7 @@ export default function Contact() {
                   )),
                 )}
               </select>
+
               <textarea
                 className="form-input"
                 name="message"
@@ -211,6 +220,7 @@ export default function Contact() {
                 value={formData.message}
                 onChange={handleChange}
               />
+
               <button
                 type="submit"
                 className="btn-primary"
@@ -223,6 +233,7 @@ export default function Contact() {
               >
                 Enviar por WhatsApp →
               </button>
+
               <p
                 style={{
                   fontFamily: "var(--sans)",
