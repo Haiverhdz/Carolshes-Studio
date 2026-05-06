@@ -1,6 +1,17 @@
 import { useState } from "react";
 import FadeIn from "./FadeIn";
 import { SERVICES, CONTACT_INFO, WHATSAPP_NUMBER } from "../constants/data";
+import { GoogleMaps } from "../components/icons/Maps";
+import { WhatsApp } from "../components/icons/WhatsApp";
+import { Gmail } from "../components/icons/Gmail";
+
+// 🔥 Mapeo de iconos (UI)
+const icons = {
+  maps: <GoogleMaps className="h-5 w-5 text-[#c4bdb6]" />,
+  whatsapp: <WhatsApp className="h-5 w-5 text-green-500" />,
+  gmail: <Gmail className="h-5 w-5 text-red-400" />,
+  time: <span className="text-sm">⏰</span>,
+};
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -9,6 +20,7 @@ export default function Contact() {
     service: "",
     message: "",
   });
+
   const [sent, setSent] = useState(false);
 
   const handleChange = (e) => {
@@ -18,11 +30,14 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const msg = `Hola! Me llamo ${formData.name}. Quiero reservar: ${formData.service}. Tel: ${formData.phone}. ${formData.message}`;
+
     window.open(
       `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,
       "_blank",
     );
+
     setSent(true);
   };
 
@@ -33,152 +48,52 @@ export default function Contact() {
         padding: "100px 24px",
         background: "var(--dark)",
         color: "var(--cream)",
-        overflow: "hidden",
       }}
     >
-      <div
-        className="contact-mobile"
-      >
-        {/* Left — info */}
+      <div className="contact-mobile">
+        {/* INFO */}
         <FadeIn>
           <div>
-            <span
-              className="divider-line"
-              style={{ background: "var(--gold)", marginBottom: 24 }}
-            />
-            <div
-              style={{
-                fontFamily: "var(--sans)",
-                fontSize: 11,
-                letterSpacing: "0.3em",
-                textTransform: "uppercase",
-                color: "var(--gold)",
-                marginBottom: 16,
-              }}
-            >
-              Reservas
-            </div>
+            <span className="divider-line" />
 
-            <h2
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: "clamp(36px, 4vw, 52px)",
-                fontWeight: 300,
-                color: "var(--cream)",
-                lineHeight: 1.1,
-                marginBottom: 28,
-              }}
-            >
-              Agenda tu
-              <br />
-              <em>cita hoy</em>
+            <div className="contact-subtitle">Reservas</div>
+
+            <h2 className="contact-title">
+              Agenda tu <br /> <em>cita hoy</em>
             </h2>
 
-            <p
-              style={{
-                fontFamily: "var(--sans)",
-                fontSize: 14,
-                fontWeight: 300,
-                color: "#9e9088",
-                lineHeight: 1.8,
-                marginBottom: 40,
-              }}
-            >
+            <p className="contact-text">
               Escríbeme directamente por WhatsApp o completa el formulario y te
               contactaré para confirmar tu cita.
             </p>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            <div className="contact-info">
               {CONTACT_INFO.map(({ icon, text }) => (
-                <div
-                  key={text}
-                  style={{ display: "flex", alignItems: "center", gap: 14 }}
-                >
-                  <span style={{ fontSize: 16 }}>{icon}</span>
-                  <span
-                    style={{
-                      fontFamily: "var(--sans)",
-                      fontSize: 14,
-                      fontWeight: 300,
-                      color: "#c4bdb6",
-                    }}
-                  >
-                    {text}
-                  </span>
+                <div key={text} className="contact-item">
+                  <span>{icons[icon]}</span>
+                  <span>{text}</span>
                 </div>
               ))}
             </div>
           </div>
         </FadeIn>
 
-        {/* Right — form */}
+        {/* FORM */}
         <FadeIn delay={0.2}>
           {sent ? (
-            <div
-              style={{
-                textAlign: "center",
-                padding: "40px 24px",
-                border: "1px solid #3a3028",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: 48,
-                  color: "var(--gold)",
-                  marginBottom: 16,
-                }}
-              >
-                ✦
-              </div>
+            <div className="contact-success">
+              <div className="star">✦</div>
+              <h3>¡Listo!</h3>
+              <p>Abriendo WhatsApp para confirmar tu cita...</p>
 
-              <h3
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: 28,
-                  color: "var(--cream)",
-                  marginBottom: 12,
-                }}
-              >
-                ¡Listo!
-              </h3>
-
-              <p
-                style={{
-                  fontFamily: "var(--sans)",
-                  fontSize: 14,
-                  color: "#9e9088",
-                }}
-              >
-                Abriendo WhatsApp para confirmar tu cita...
-              </p>
-
-              <button
-                className="btn-outline"
-                style={{
-                  marginTop: 32,
-                  borderColor: "var(--gold)",
-                  color: "var(--gold)",
-                }}
-                onClick={() => setSent(false)}
-              >
+              <button onClick={() => setSent(false)}>
                 Enviar otro mensaje
               </button>
             </div>
           ) : (
-            <form
-              onSubmit={handleSubmit}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 14,
-                width: "100%",
-                minWidth: 0,
-              }}
-            >
+            <form onSubmit={handleSubmit} className="contact-form">
               <input
                 required
-                className="form-input"
                 name="name"
                 placeholder="Tu nombre"
                 value={formData.name}
@@ -187,7 +102,6 @@ export default function Contact() {
 
               <input
                 required
-                className="form-input"
                 name="phone"
                 placeholder="Tu teléfono"
                 value={formData.phone}
@@ -196,12 +110,12 @@ export default function Contact() {
 
               <select
                 required
-                className="form-input"
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
               >
                 <option value="">Selecciona un servicio</option>
+
                 {SERVICES.map((group) =>
                   group.items.map((item) => (
                     <option key={item.name} value={item.name}>
@@ -212,43 +126,51 @@ export default function Contact() {
               </select>
 
               <textarea
-                className="form-input"
                 name="message"
                 rows={4}
                 placeholder="¿Alguna nota o pregunta?"
-                style={{ resize: "vertical" }}
                 value={formData.message}
                 onChange={handleChange}
               />
 
-              <button
-                type="submit"
-                className="btn-primary"
-                style={{
-                  background: "var(--gold)",
-                  justifyContent: "center",
-                  fontSize: 11,
-                  marginTop: 8,
-                }}
-              >
-                Enviar por WhatsApp →
-              </button>
+              <button type="submit">Enviar por WhatsApp →</button>
 
-              <p
-                style={{
-                  fontFamily: "var(--sans)",
-                  fontSize: 11,
-                  color: "#6b5c4e",
-                  textAlign: "center",
-                  lineHeight: 1.6,
-                }}
-              >
+              <p className="contact-note">
                 Al enviar, abrirás WhatsApp con tu mensaje listo.
               </p>
             </form>
           )}
         </FadeIn>
       </div>
+
+      {/* ✅ MAPA */}
+      <FadeIn delay={0.3}>
+        <div className="map-section">
+          <h3>Visítanos en Bello, Antioquia</h3>
+
+          <div className="map-container">
+<iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.3752649943117!2d-75.53125132576898!3d6.345426025208661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e442f89f65dfbd9%3A0x930f105cc585e6dd!2sPoblado%20Niqu%C3%ADa%20Apartamentos!5e0!3m2!1ses!2sco!4v1778028092357!5m2!1ses!2sco"
+  width="100%"
+  height="450"
+  style={{ border: 0 }}
+  allowFullScreen
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+></iframe>
+
+          </div>
+
+          <a
+            href="https://maps.google.com/?cid=2183710068942374631"
+            target="_blank"
+            rel="noreferrer"
+            className="map-button"
+          >
+            Cómo llegar →
+          </a>
+        </div>
+      </FadeIn>
     </section>
   );
 }

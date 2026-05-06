@@ -1,6 +1,10 @@
 import efetoNatural1 from "../assets/gallery/efecto-natural-1.webp";
 import pestatina1 from "../assets/gallery/pestanina-1.webp";
 import volumenYY1 from "../assets/gallery/volumen-YY.webp";
+import laminadoCejas1 from "../assets/gallery/laminado-de-cejas-1.webp";
+import depilacionDeCejas from "../assets/gallery/depilacion-de-cejas1.webp"; 
+import axilas from "../assets/gallery/axilas.webp";
+import bozo from "../assets/gallery/bozo.webp";
 
 export const NAV_LINKS = ["Inicio", "Servicios", "Galería", "Testimonios", "Contacto"];
 
@@ -105,17 +109,20 @@ export const GALLERY = [
   { label: "Efecto Natural",     category: "Pestañas",     aspect: "tall",   img: efetoNatural1 },
   { label: "Efecto Pestañina",   category: "Pestañas",     aspect: "square", img: pestatina1 },
   { label: "Volumen YY",         category: "Pestañas",     aspect: "square", img: volumenYY1 },
-  { label: "Laminado de Cejas",  category: "Cejas",        aspect: "wide",   img: "/gallery/laminado-cejas-1.jpg" },
-  { label: "Depilación en Cera", category: "Depilaciones", aspect: "square", img: "/gallery/depilacion-cera-1.jpg" },
+  { label: "Laminado de Cejas",  category: "Cejas",        aspect: "wide",   img: laminadoCejas1 },
+  { label: "Depilación en Cera", category: "Depilaciones", aspect: "square", img: depilacionDeCejas },
+  { label: "Depilación en Cera", category: "Depilaciones", aspect: "square", img: axilas },
+  { label: "Depilación en Cera", category: "Depilaciones", aspect: "square", img: bozo },
+
 ];
 
 export const FILTERS = ["Todos", "Pestañas", "Cejas", "Depilaciones"];
 
 export const CONTACT_INFO = [
-  { icon: "📍", text: "Bello, Antioquia" },
-  { icon: "⏰", text: "Lun – Sáb: 9am – 7pm" },
-  { icon: "📱", text: "+57 316 407 6231" },
-  { icon: "📧", text: "carolina.perez0399@gmail.com" },
+  { icon: "maps", text: "Bello, Antioquia" },
+  { icon: "time", text: "Lun – Sáb: 9am – 7pm" },
+  { icon: "whatsapp", text: "+57 316 407 6231" },
+  { icon: "gmail", text: "carolina.perez0399@gmail.com" },
 ];
 
 export const WHATSAPP_NUMBER = "573164076231";
